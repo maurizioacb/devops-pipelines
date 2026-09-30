@@ -1,0 +1,24 @@
+name: ci pipeline # nombre del pipeline sin comas extra
+
+on: # se activara el pipeline en cada push a la rama main
+  push:
+    branches: [ main ]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest # se ejecutara en un contenedor de ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
